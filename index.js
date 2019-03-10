@@ -33,7 +33,7 @@ const watch = async (it, startCoords) => {
     }
     const mapUrl = getMapUrl({
       start: latLng.toUrlValue(),
-      dest: encodeUriComponent(input.value || "Jiyugaoka Station"),
+      dest: encodeURIComponent(input.value || "Jiyugaoka Station"),
       width,
       height
     });
