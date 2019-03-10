@@ -1,5 +1,6 @@
 const maxMapSize = 640;
 const key = "AIzaSyCaZG8svM2nRjgf_jWGsQVkdlXWbxIWmn0";
+const distanceThreshold = 200;
 
 const geo = navigator.geolocation;
 const getCurrentPosition = promisify(geo.getCurrentPosition, {
@@ -15,32 +16,34 @@ const watchPosition = iteratify(geo.watchPosition, {
   stopper: id => geo.clearWatch(id)
 });
 
-const tooClose = (current, updated) => true;
+const tooClose = (current, updated) =>
+  google.maps.geometry.spherical.computeDistanceBetween(current, updated) < distanceThreshold;
 
 const watch = async (it, startCoords) => {
   const input = document.querySelector("input");
   const ratio = innerWidth / innerHeight;
   const width = Math.floor(ratio > 1 ? maxMapSize : maxMapSize * ratio);
   const height = Math.floor(ratio > 1 ? maxMapSize / ratio : maxMapSize);
-  let currCoords = null;
+  let currLatLng = null;
 
-  const updateMap = coords => {
-    if (currCoords != null && tooClose(currCoords, coords)) {
+  const updateMap = latLng => {
+    if (currLatLng != null && tooClose(currLatLng, latLng)) {
+      console.log("Too close");
       return;
     }
     const mapUrl = getMapUrl({
-      start: `${coords.latitude},${coords.longitude}`,
+      start: latLng.toUrlValue(),
       dest: input.value || "Jiyugaoka Station",
       width,
       height
     });
     document.body.style.backgroundImage = `url("${mapUrl}")`;
-    currCoords = coords;
+    currLatLng = latLng;
   };
-  updateMap(startCoords);
+  updateMap(new google.maps.LatLng(startCoords.latitude, startCoords.longitude));
 
   for await (const p of it) {
-    updateMap(p.coords);
+    updateMap(new google.maps.LatLng(p.coords.latitude, p.coords.longitude));
   }
   console.log("done");
 };
