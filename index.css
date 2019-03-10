@@ -1,18 +1,21 @@
 body {
-  padding: 0;
-  margin: 0;
-  background: white;
+  background: #eee;
   background-size: cover;
   background-repeat: no-repeat;
+  font-family:  'Noto Sans JP', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 input {
-  position: fixed;
-  background: transparent;
-  color: red;
+  background: linear-gradient(white, rgba(255, 255, 255, .75), transparent);
   border: 0;
   border-bottom: 3px dotted black;
+  color: #dd0074;
   font-size: 1.2em;
+  font-weight: bold;
   padding: 8px;
+  position: fixed;
+  width: 100%;
 }
 img {
   max-width: 640px;
@@ -26,9 +29,9 @@ button {
   bottom: 20px;
   height: 48px;
   width: 48px;
-  background-color: green;
+  background-color: #61d800;
   border-radius: 50%;
 }
 button.on {
-  background-color: red;
+  background-color: #ef0078;
 }
