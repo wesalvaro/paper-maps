@@ -74,8 +74,8 @@ document.querySelector("button").addEventListener("click", function() {
 
 window.addEventListener("DOMContentLoaded", () => {
   const parsedUrl = new URL(window.location);
-  const title = parsedUrl.searchParams.get("title");
-  const text = parsedUrl.searchParams.get("text");
+  const title = parsedUrl.searchParams.get("title") || "";
+  const text = parsedUrl.searchParams.get("text") || "";
   const url = parsedUrl.searchParams.get("url");
-  document.querySelector("input").value = `${title} ${text}`;
+  document.querySelector("input").value = `${title} ${text}`.trim();
 });
