@@ -88,3 +88,8 @@ window.addEventListener("beforeinstallprompt", event => {
 window.addEventListener("appinstalled", event => {
   console.log("👍 installed", event);
 });
+
+if ("serviceWorker" in navigator) {
+  console.log("👍 service workers are supported");
+  navigator.serviceWorker.register('/sw.js');
+}
