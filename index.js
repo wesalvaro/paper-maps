@@ -79,3 +79,12 @@ window.addEventListener("DOMContentLoaded", () => {
   const url = parsedUrl.searchParams.get("url");
   document.querySelector("input").value = `${title} ${text}`.trim();
 });
+
+window.addEventListener("beforeinstallprompt", event => {
+  console.log("👍 can install", event);
+  event.prompt();
+});
+
+window.addEventListener("appinstalled", event => {
+  console.log("👍 installed", event);
+});
