@@ -9,5 +9,13 @@
     "src": "/images/icons-512.png",
     "type": "image/png",
     "sizes": "512x512"
-  }]
+  }],
+  "share_target": {
+    "action": "/",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }
